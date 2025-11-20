@@ -1,0 +1,39 @@
+name: CodeAssist CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest
+        pip install -r backend/requirements.txt
+
+    - name: Run Automated Tests
+      run: |
+        # Placeholder for actual pytest execution
+        echo "Running unit tests..."
+        # pytest backend/tests
+
+    - name: Build Docker Image
+      run: |
+        docker build -t codeassist-backend ./backend
+
+    # Deployment Step for AWS Lambda (Conceptual)
+    - name: Deploy to AWS Lambda
+      if: success()
+      run: |
+        echo "Deploying container to AWS ECR..."
+        echo "Updating Lambda function configuration..."

@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.editor-box { display: flex; gap: 20px; }
+textarea { width: 100%; height: 300px; background: #2d2d2d; color: #00ff00; border: 1px solid #444; padding: 10px; font-family: monospace; }
+button { padding: 10px 20px; cursor: pointer; background: #007acc; color: white; border: none; font-weight: bold; margin-right: 10px; }
+button:hover { background: #005fa3; }
+.output { background: #252526; padding: 20px; border-left: 4px solid #007acc; min-height: 100px; margin-top: 20px; white-space: pre-wrap;}

@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # --- Database ---
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: codeassist
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - codeassist-net
+
+  # --- Backend API ---
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/codeassist
+      - OPENAI_API_KEY=  # Leave empty for Mock Mode
+    depends_on:
+      - db
+    networks:
+      - codeassist-net
+
+  # --- Frontend UI ---
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    networks:
+      - codeassist-net
+
+volumes:
+  postgres_data:
+
+networks:
+  codeassist-net:
+    driver: bridge
