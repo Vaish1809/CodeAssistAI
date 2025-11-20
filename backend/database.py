@@ -4,7 +4,6 @@ from sqlalchemy.orm import sessionmaker
 import datetime
 import os
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@db:5432/codeassist")
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -36,4 +35,5 @@ def get_recent_snippets():
     return [
         {"id": 1, "code": "def hello(): pass", "description": "Mock History Item 1"},
         {"id": 2, "code": "print('world')", "description": "Mock History Item 2"}
+
     ]
